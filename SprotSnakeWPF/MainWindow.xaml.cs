@@ -51,6 +51,7 @@ namespace SprotSnakeWPF
             InitializeComponent();
             Player = new MediaPlayer();
             Player.Open(new Uri($"{path}" + "Inc\\Sounds\\Eat.mp3", UriKind.RelativeOrAbsolute));
+            //OR need add absolute path and check it when installing
             gameTickTimer.Tick += GameTickTimer_Tick;
             gameStatus = GameStatus.Running;
         }
@@ -139,7 +140,7 @@ namespace SprotSnakeWPF
             bool doneDrawingBackground = false;
             int nextX = 0, nextY = 0;
             int rowCounter = 0;
-            bool nextIsOdd = false;
+            
 
             while (doneDrawingBackground == false)
             {
@@ -153,14 +154,13 @@ namespace SprotSnakeWPF
                 Canvas.SetTop(rect, nextY);
                 Canvas.SetLeft(rect, nextX);
 
-                nextIsOdd = !nextIsOdd;
+                
                 nextX += SnakeSquareSize;
                 if (nextX >= GameArea.ActualWidth)
                 {
                     nextX = 0;
                     nextY += SnakeSquareSize;
                     rowCounter++;
-                    nextIsOdd = (rowCounter % 2 != 0);
                 }
 
                 if (nextY >= GameArea.ActualHeight)
